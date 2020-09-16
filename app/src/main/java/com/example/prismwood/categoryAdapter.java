@@ -75,7 +75,6 @@ public class categoryAdapter extends RecyclerView.Adapter<categoryAdapter.ViewHo
                     List<Storefront.Product> category_products = new ArrayList<>();
                      fetchProductsinCollection(cid);
 
-
                 }
             });
 
