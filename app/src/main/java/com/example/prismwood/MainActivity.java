@@ -32,6 +32,7 @@ public class MainActivity extends AppCompatActivity {
     Context context;
     SearchView search_query;
 
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -42,6 +43,7 @@ public class MainActivity extends AppCompatActivity {
         homecart = findViewById(R.id.home_cart_icon);
         context = this;
         search_query = findViewById(R.id.home_search);
+
 
 
 //        Intent isback = getIntent();
@@ -118,6 +120,8 @@ public class MainActivity extends AppCompatActivity {
                                                         .edges(productEdgeQuery -> productEdgeQuery
                                                                 .node(productQuery -> productQuery
                                                                         .title()
+                                                                        .availableForSale()
+
                                                                         .images(arg -> arg.first(10), imageConnectionQuery -> imageConnectionQuery
                                                                                 .edges(imageEdgeQuery -> imageEdgeQuery
                                                                                         .node(imageQuery -> imageQuery
@@ -131,6 +135,8 @@ public class MainActivity extends AppCompatActivity {
                                                                                         .node(productVariantQuery -> productVariantQuery
                                                                                                 .price()
                                                                                                 .title()
+                                                                                                .availableForSale()
+                                                                                                .compareAtPrice()
                                                                                                 .available()
                                                                                         )
                                                                                 )

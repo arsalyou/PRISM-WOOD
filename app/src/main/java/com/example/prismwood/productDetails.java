@@ -11,7 +11,8 @@ import android.webkit.WebView;
 import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
-import android.widget.TextView;
+        import android.widget.RelativeLayout;
+        import android.widget.TextView;
 
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
@@ -45,6 +46,8 @@ public class productDetails extends AppCompatActivity {
     Storefront.Product product;
     View cartnow;
     Context context;
+    RelativeLayout detail_sale_layer;
+    TextView detail_cuttedprice;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -59,17 +62,15 @@ public class productDetails extends AppCompatActivity {
         images= findViewById(R.id.images_recyclerview);
         variations=findViewById(R.id.variations_recyclerview);
         context = this;
-
+        detail_sale_layer = findViewById(R.id.detail_sale_layer);
         addcart= findViewById(R.id.add_to_cart_btn);
         buynow= findViewById(R.id.buy_now_btn);
         descriptor= findViewById(R.id.product_detail);
         mainimg= findViewById(R.id.main_pro_img);
         varSelected= findViewById(R.id.var_name);
-
-
+        detail_cuttedprice = findViewById(R.id.detail_cuttedprice);
 
         String pid = getIntent().getStringExtra("producr_id");
-
 
         GraphClient client = GraphClient.builder(this)
                 .shopDomain(SHOP_DOMAIN)
@@ -82,6 +83,7 @@ public class productDetails extends AppCompatActivity {
                                 .title()
                                 .description()
                                 .descriptionHtml()
+
 
                                 .images(arg -> arg.first(10), imageConnectionQuery -> imageConnectionQuery
                                         .edges(imageEdgeQuery -> imageEdgeQuery
@@ -97,6 +99,7 @@ public class productDetails extends AppCompatActivity {
                                                         .title()
                                                         .product(Storefront.ProductQuery::getClass)
                                                         .availableForSale()
+                                                        .compareAtPrice()
                                                         .image(Storefront.ImageQuery::src)
                                                         .selectedOptions(selectedOption -> selectedOption
                                                                 .name()
@@ -154,19 +157,21 @@ public class productDetails extends AppCompatActivity {
                         price.setText("Rs "+pr);
                         if(productVariants.size()==1){
 
-                            variantsAdapter allvariants = new variantsAdapter(productVariants, price,varSelected);
+                            variantsAdapter allvariants = new variantsAdapter(productVariants, price,varSelected,detail_sale_layer, detail_cuttedprice);
                             variations.setVisibility(View.GONE);
+                            if(productVariants.get(0).getAvailableForSale() && productVariants.get(0).getCompareAtPrice() != null){
+                                detail_cuttedprice.setText(productVariants.get(0).getCompareAtPrice().toString());
+                            }else{
+                                detail_sale_layer.setVisibility(View.INVISIBLE);
+                            }
                         }else{
                             varSelected.setVisibility(View.VISIBLE);
-                            variantsAdapter allvariants = new variantsAdapter(productVariants, price,varSelected);
+                            variantsAdapter allvariants = new variantsAdapter(productVariants, price,varSelected,detail_sale_layer, detail_cuttedprice);
                             variations.setAdapter(allvariants);
                         }
 
 
 
-
-                        Log.e("TAG", "PRO" + productVariants.get(0).getId());
-                        Log.e("TAG", "PRO" + productVariants.get(0).getPrice());
                     }
                 });
 

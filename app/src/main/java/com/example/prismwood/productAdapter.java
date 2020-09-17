@@ -48,7 +48,7 @@ public class productAdapter extends RecyclerView.Adapter<productAdapter.ViewHold
         //images.get(0).getNode().
         BigDecimal price = products.get(position).getVariants().getEdges().get(0).getNode().getPrice();
         int cutRate = -1;
-        if (products.get(position).getVariants().getEdges().get(0).getNode().getAvailableForSale()){
+        if (products.get(position).getVariants().getEdges().get(0).getNode().getAvailableForSale() && products.get(position).getVariants().getEdges().get(0).getNode().getCompareAtPrice() != null){
             BigDecimal cutted_price = products.get(position).getVariants().getEdges().get(0).getNode().getCompareAtPrice();
             cutRate = cutted_price.intValue();
         }

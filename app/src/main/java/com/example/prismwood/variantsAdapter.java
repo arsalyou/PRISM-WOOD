@@ -4,6 +4,7 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
+import android.widget.RelativeLayout;
 import android.widget.TextView;
 
 import androidx.annotation.NonNull;
@@ -21,13 +22,17 @@ public class variantsAdapter  extends  RecyclerView.Adapter<variantsAdapter.View
     TextView variation;
     int prev=0;
     int curr=0;
+    RelativeLayout sale_layout;
+    TextView sale_price;
 
 
-    public variantsAdapter(List<Storefront.ProductVariant> productVariants, TextView price, TextView varselected) {
+    public variantsAdapter(List<Storefront.ProductVariant> productVariants, TextView price, TextView varselected, RelativeLayout sale_layout, TextView sale_price) {
         this.productVariants = productVariants;
         this.price = price;
         last_variantid= productVariants.get(0);
         variation = varselected;
+        this.sale_layout = sale_layout;
+        this.sale_price = sale_price;
     }
 
     public variantsAdapter(List<Storefront.ProductVariant> productVariants) {
@@ -78,6 +83,11 @@ public class variantsAdapter  extends  RecyclerView.Adapter<variantsAdapter.View
                    price.setText("Rs "+productVariants.get(pos).getPrice().toString());
                    last_variantid= productVariants.get(pos);
                    variation.setText(productVariants.get(pos).getTitle());
+                   if(productVariants.get(pos).getAvailableForSale()){
+                       sale_price.setText(productVariants.get(pos).getCompareAtPrice().toString());
+                   }else{
+                       sale_layout.setVisibility(View.INVISIBLE);
+                   }
 
 
 
