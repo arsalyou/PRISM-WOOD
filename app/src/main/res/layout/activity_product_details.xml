@@ -84,7 +84,6 @@
                             android:background="@color/orange" />
 
                         <TextView
-
                             android:id="@+id/detail_cuttedprice"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"

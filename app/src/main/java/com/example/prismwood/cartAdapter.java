@@ -158,9 +158,9 @@ public class cartAdapter  extends RecyclerView.Adapter<cartAdapter.ViewHolder> {
                     //cartDetails.CartAdapter.notifyItemRemoved(i);
                     cartDetails.cartRecycler.getAdapter().notifyItemRemoved(i);
 
-                    //cartDetails.CartAdapter.notifyDataSetChanged();
+                    cartDetails.cartRecycler.getAdapter().notifyDataSetChanged();
                     //cartDetails.CartAdapter.notifyItemRemoved(i);
-                    //cartDetails.CartAdapter.notifyItemRangeChanged(i, cartItemModalList.size());
+                    cartDetails.cartRecycler.getAdapter().notifyItemRangeChanged(i, cartItemModalList.size());
                     int total_amount=0;
                     total_amount=find_total();
                     cartDetails.total_amt.setText("Rs "+total_amount);

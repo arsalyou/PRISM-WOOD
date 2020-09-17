@@ -38,6 +38,7 @@ public class addressDetails extends AppCompatActivity {
     Context context;
     String orderID;
     String cart_amt;
+    TextView final_total;
     List<String> customerDetails;
     public static String customerid;
 
@@ -50,10 +51,11 @@ public class addressDetails extends AppCompatActivity {
         name = findViewById(R.id.checkout_name);
         addr = findViewById(R.id.checkout_addr);
         contact = findViewById(R.id.checkout_contact);
+        final_total= findViewById(R.id.total_final_price);
 
         product_total = findViewById(R.id.total_items_price);
         delivery_charges = findViewById(R.id.delivery_charges);
-        Overall_total = findViewById(R.id.total_price);
+        Overall_total = findViewById(R.id.total_final_price);
         updatedetails = findViewById(R.id.update_addr);
         place_order = findViewById(R.id.complete_order);
 
@@ -67,6 +69,7 @@ public class addressDetails extends AppCompatActivity {
         Intent intent = getIntent();
         cart_amt = intent.getStringExtra("total_amt");
         product_total.setText(cart_amt);
+        final_total.setText(cart_amt);
 
 
         updatedetails.setOnClickListener(new View.OnClickListener() {
@@ -143,8 +146,6 @@ public class addressDetails extends AppCompatActivity {
             e.printStackTrace();
         }
 
-
-        Toast.makeText(getApplicationContext(), jobj.toString(), Toast.LENGTH_LONG).show();
         new AsyncHttpClient().post(this, url, jsonEntity, "application/json", new JsonHttpResponseHandler() {
             @Override
             public void onSuccess(int statusCode, Header[] headers, JSONObject jData) {
