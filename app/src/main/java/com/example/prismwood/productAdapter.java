@@ -52,7 +52,6 @@ public class productAdapter extends RecyclerView.Adapter<productAdapter.ViewHold
             BigDecimal cutted_price = products.get(position).getVariants().getEdges().get(0).getNode().getCompareAtPrice();
             cutRate = cutted_price.intValue();
         }
-
         int intRate = price.intValue();
         String pr = Integer.toString(intRate);
         holder.setdetails(name, id , img,pr, cutRate );
@@ -85,7 +84,6 @@ public class productAdapter extends RecyclerView.Adapter<productAdapter.ViewHold
                 public void onClick(View v) {
                     Intent productDetailIntent = new Intent(itemView.getContext(),productDetails.class);
                     productDetailIntent.putExtra("producr_id", products.get(getAdapterPosition()).getId().toString());
-
                     itemView.getContext().startActivity(productDetailIntent);
                 }
             });
@@ -100,7 +98,7 @@ public class productAdapter extends RecyclerView.Adapter<productAdapter.ViewHold
             if( cutrate == -1){
                 sale_view.setVisibility(View.INVISIBLE);
             }else{
-                old_price.setText(Integer.toString(cutrate));
+                old_price.setText("Rs " + Integer.toString(cutrate));
             }
         }
     }

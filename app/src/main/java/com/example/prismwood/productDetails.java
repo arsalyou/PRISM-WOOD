@@ -160,7 +160,7 @@ public class productDetails extends AppCompatActivity {
                             variantsAdapter allvariants = new variantsAdapter(productVariants, price,varSelected,detail_sale_layer, detail_cuttedprice);
                             variations.setVisibility(View.GONE);
                             if(productVariants.get(0).getAvailableForSale() && productVariants.get(0).getCompareAtPrice() != null){
-                                detail_cuttedprice.setText(productVariants.get(0).getCompareAtPrice().toString());
+                                detail_cuttedprice.setText("Rs "+productVariants.get(0).getCompareAtPrice().toString());
                             }else{
                                 detail_sale_layer.setVisibility(View.INVISIBLE);
                             }

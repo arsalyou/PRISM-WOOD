@@ -83,8 +83,8 @@ public class variantsAdapter  extends  RecyclerView.Adapter<variantsAdapter.View
                    price.setText("Rs "+productVariants.get(pos).getPrice().toString());
                    last_variantid= productVariants.get(pos);
                    variation.setText(productVariants.get(pos).getTitle());
-                   if(productVariants.get(pos).getAvailableForSale()){
-                       sale_price.setText(productVariants.get(pos).getCompareAtPrice().toString());
+                   if(productVariants.get(pos).getAvailableForSale() && productVariants.get(pos).getCompareAtPrice() != null){
+                       sale_price.setText("Rs "+ productVariants.get(pos).getCompareAtPrice().toString());
                    }else{
                        sale_layout.setVisibility(View.INVISIBLE);
                    }
@@ -96,8 +96,8 @@ public class variantsAdapter  extends  RecyclerView.Adapter<variantsAdapter.View
         }
         public void setPrice(String name, String pri){
             variant.setText(name);
-            price.setText(pri);
-
+            price.setText("Rs " +pri);
+            variation.setText(productVariants.get(0).getTitle());
 
         }
 
