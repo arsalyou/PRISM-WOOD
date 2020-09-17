@@ -5,6 +5,7 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
+import android.widget.RelativeLayout;
 import android.widget.TextView;
 
 import androidx.annotation.NonNull;
@@ -46,10 +47,15 @@ public class productAdapter extends RecyclerView.Adapter<productAdapter.ViewHold
         List<Storefront.ImageEdge> images =products.get(position).getImages() != null ? products.get(position).getImages().getEdges() : null;
         //images.get(0).getNode().
         BigDecimal price = products.get(position).getVariants().getEdges().get(0).getNode().getPrice();
+        int cutRate = -1;
+        if (products.get(position).getVariants().getEdges().get(0).getNode().getAvailableForSale()){
+            BigDecimal cutted_price = products.get(position).getVariants().getEdges().get(0).getNode().getCompareAtPrice();
+            cutRate = cutted_price.intValue();
+        }
+
         int intRate = price.intValue();
         String pr = Integer.toString(intRate);
-
-        holder.setdetails(name, id , img,pr );
+        holder.setdetails(name, id , img,pr, cutRate );
 
     }
 
@@ -65,14 +71,14 @@ public class productAdapter extends RecyclerView.Adapter<productAdapter.ViewHold
         private TextView sale_price;
         private TextView old_price;
         Integer id;
-
-
+        private RelativeLayout sale_view;
 
         public ViewHolder(@NonNull View itemView) {
             super(itemView);
             title= itemView.findViewById(R.id.pro_name);
             img = itemView.findViewById(R.id.pro_img);
-
+            old_price = itemView.findViewById(R.id.cutted_price);
+            sale_view = itemView.findViewById(R.id.sale_view);
             sale_price= itemView.findViewById(R.id.pro_price);
             itemView.setOnClickListener(new View.OnClickListener() {
                 @Override
@@ -84,14 +90,18 @@ public class productAdapter extends RecyclerView.Adapter<productAdapter.ViewHold
                 }
             });
         }
-        public void setdetails(String tit,String id, String im, String sale){
+        public void setdetails(String tit,String id, String im, String sale, int cutrate){
             title.setText(tit);
             RequestOptions myOptions = new RequestOptions()
                     .override(500, 500);
             Glide.with(itemView.getContext()).load(im).fitCenter().apply(myOptions).placeholder(R.drawable.white_circular_border).into(img);
 
             sale_price.setText("Rs "+sale);
-
+            if( cutrate == -1){
+                sale_view.setVisibility(View.INVISIBLE);
+            }else{
+                old_price.setText(Integer.toString(cutrate));
+            }
         }
     }
 }
