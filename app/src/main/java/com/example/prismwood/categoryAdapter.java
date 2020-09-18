@@ -101,6 +101,7 @@ public class categoryAdapter extends RecyclerView.Adapter<categoryAdapter.ViewHo
                                             .edges(productEdgeQuery -> productEdgeQuery
                                                     .node(productQuery -> productQuery
                                                             .title()
+                                                            .availableForSale()
                                                             .images(arg -> arg.first(10), imageConnectionQuery -> imageConnectionQuery
                                                                     .edges(imageEdgeQuery -> imageEdgeQuery
                                                                             .node(imageQuery -> imageQuery
@@ -114,6 +115,7 @@ public class categoryAdapter extends RecyclerView.Adapter<categoryAdapter.ViewHo
                                                                             .node(productVariantQuery -> productVariantQuery
                                                                                     .price()
                                                                                     .title()
+                                                                                    .compareAtPrice()
                                                                                     .available()
                                                                             )
                                                                     )
