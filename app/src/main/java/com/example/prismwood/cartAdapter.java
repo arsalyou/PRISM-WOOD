@@ -113,6 +113,7 @@ public class cartAdapter  extends RecyclerView.Adapter<cartAdapter.ViewHolder> {
                                 cartItemModalList.get(i).setQuantity(Integer.parseInt(input.getText().toString()));
 
 
+
                                 //cartDetails.refreshItem(i);
                                 int total_amount=0;
 //                                for(int i=0 ; i < cartItemModalList.size(); i++){
@@ -123,6 +124,7 @@ public class cartAdapter  extends RecyclerView.Adapter<cartAdapter.ViewHolder> {
                                 total_amount=find_total();
                                 cartDetails.total_amt.setText("Rs "+Integer.toString(total_amount));
                                 getAdapterPosition();
+                                new PrefManager(mcontext).addCartItem(cartItemModalList.get(i).getProduct().getId(), cartItemModalList.get(i).getProduct_variant().getId().toString(),newQty);
                             }
                             //cartItemModalList.get(cartItemModalList.size()-1).
                         }

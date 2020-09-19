@@ -58,7 +58,7 @@ public class postCustomer {
         JSONObject jobj = new JSONObject();
         jobj.put("customer", odr);
 
-        String url = "https://8e610e9a73931ce275e0fcea8fa2aa54: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@prism-woods.myshopify.com/admin/api/2020-07/customers.json";
+        String url = BuildConfig.BASE_URL+"/admin/api/2020-07/customers.json";
 
         StringEntity jsonEntity = null;
         try {

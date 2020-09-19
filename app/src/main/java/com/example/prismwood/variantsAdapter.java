@@ -98,6 +98,11 @@ public class variantsAdapter  extends  RecyclerView.Adapter<variantsAdapter.View
             variant.setText(name);
             price.setText("Rs " +pri);
             variation.setText(productVariants.get(0).getTitle());
+            if(productVariants.get(0).getCompareAtPrice() != null){
+                sale_price.setText("Rs "+ productVariants.get(0).getCompareAtPrice().toString());
+            }else{
+                sale_layout.setVisibility(View.INVISIBLE);
+            }
 
         }
 

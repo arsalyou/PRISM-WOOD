@@ -37,6 +37,7 @@ public class addressDetails extends AppCompatActivity {
     Button place_order;
     Context context;
     String orderID;
+    String ordernumber;
     String cart_amt;
     TextView final_total;
     List<String> customerDetails;
@@ -101,10 +102,15 @@ public class addressDetails extends AppCompatActivity {
 
     }
     public String placeOrder(String customerId, List<cartInfo> allCartInfo ) throws JSONException, UnsupportedEncodingException {
+       if(allCartInfo == null){
+           Toast.makeText(getBaseContext(),  "Place your order later, Server is busy", Toast.LENGTH_LONG).show();
+           return "";
+       }
         JSONObject odr = new JSONObject();
-
-        odr.put("email","foo@example.com");
+        odr.put("email",customerDetails.get(5));
         odr.put("fulfillment_status", "unfulfilled");
+        odr.put("fulfillment_status", "unfulfilled");
+        odr.put("financial_status","pending");
         odr.put("send_receipt", true);
         odr.put("send_fulfillment_receipt", false);
         JSONArray jarr = new JSONArray();
@@ -135,9 +141,9 @@ public class addressDetails extends AppCompatActivity {
         billing_address.put("zip","00");
         odr.put("shipping_address", billing_address);
         JSONObject jobj = new JSONObject();
-        jobj.put("draft_order", odr);
+        jobj.put("order", odr);
 
-        String url = "https://8e610e9a73931ce275e0fcea8fa2aa54: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@prism-woods.myshopify.com/admin/api/2020-07/draft_orders.json";
+        String url = BuildConfig.BASE_URL+"/admin/api/2020-07/orders.json";
 
         StringEntity jsonEntity = null;
         try {
@@ -151,14 +157,15 @@ public class addressDetails extends AppCompatActivity {
             public void onSuccess(int statusCode, Header[] headers, JSONObject jData) {
 
                 try {
-                     orderID = jData.getJSONObject("draft_order").getString("id");
+                     orderID = jData.getJSONObject("order").getString("id");
+                    ordernumber = jData.getJSONObject("order").getString("number");
 
 
                 } catch (JSONException e) {
                     e.printStackTrace();
                 }
                 Intent ab = new Intent(context, orderComplete.class);
-                ab.putExtra("orderID", orderID);
+                ab.putExtra("orderID", "1"+ordernumber);
                 context.startActivity(ab);
                 Toast.makeText(getApplicationContext(), orderID, Toast.LENGTH_LONG).show();
             }

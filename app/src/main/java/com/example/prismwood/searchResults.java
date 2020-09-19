@@ -8,6 +8,7 @@ import android.os.Looper;
 import android.view.View;
 import android.widget.ImageButton;
 import android.widget.SearchView;
+import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
@@ -25,8 +26,8 @@ import java.util.List;
 
 public class searchResults extends AppCompatActivity {
 
-    public static final String SHOP_DOMAIN ="prism-woods.myshopify.com";
-    public static final String API_KEY = "563bba3d0fec72a1903a6770831e08c2";
+    public static final String SHOP_DOMAIN =BuildConfig.SHOP_DOMAIN;
+    public static final String API_KEY = BuildConfig.API_KEY;
     private Handler mHandler;
     Context context;
     ImageButton back;
@@ -108,6 +109,7 @@ public class searchResults extends AppCompatActivity {
                                         .edges(edges -> edges
                                                 .node(node -> node
                                                         .title()
+                                                        .availableForSale()
                                                         .images(arg -> arg.first(1), imageConnectionQuery -> imageConnectionQuery
                                                                 .edges(imageEdgeQuery -> imageEdgeQuery
                                                                         .node(imageQuery -> imageQuery
@@ -119,7 +121,9 @@ public class searchResults extends AppCompatActivity {
                                                                 .edges(variantEdgeQuery -> variantEdgeQuery
                                                                         .node(productVariantQuery -> productVariantQuery
                                                                                 .price()
+                                                                                .compareAtPrice()
                                                                                 .title()
+                                                                                .availableForSale()
                                                                                 .available()
                                                                         )
                                                                 )
@@ -138,11 +142,15 @@ public class searchResults extends AppCompatActivity {
                     @Override
                     public void run() {
                         System.out.println(response);
-                        for(int i =0 ; i <response.data().getShop().getProducts().getEdges().size() ; i++ ){
-                            products.add(response.data().getShop().getProducts().getEdges().get(i).getNode());
+                        if(response.data().getShop().getProducts().getEdges().size()  == 0){
+                            Toast.makeText(context, "No Result Found", Toast.LENGTH_LONG).show();
+                        }else {
+                            for (int i = 0; i < response.data().getShop().getProducts().getEdges().size(); i++) {
+                                products.add(response.data().getShop().getProducts().getEdges().get(i).getNode());
+                            }
+                            productAdapter proAdap = new productAdapter(products);
+                            products_recyclerview.setAdapter(proAdap);
                         }
-                        productAdapter proAdap = new productAdapter(products);
-                        products_recyclerview.setAdapter(proAdap);
                     }
                 });
 

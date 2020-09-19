@@ -90,9 +90,14 @@ public class PrefManager {
                     found = true;
                     Toast.makeText(context, "Product Exists", Toast.LENGTH_SHORT).show();
                     // allow addition but process the duplicate elements
-                    int current_qty = allVariants.get(i).getQuantity()+1;
-                    allVariants.get(i).setQuantity(current_qty);
 
+                    int current_qty ;
+                    if(qty == 1) {
+                        current_qty =allVariants.get(i).getQuantity()+ 1;
+                        allVariants.get(i).setQuantity(current_qty);
+                    }else {
+                        allVariants.get(i).setQuantity(qty);
+                    }
 
                 }
             }

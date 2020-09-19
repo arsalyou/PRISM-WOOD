@@ -9,11 +9,10 @@
         android:roundIcon="@mipmap/logo"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
-        <activity android:name=".deleteit">
-
-        </activity>
-        <activity android:name=".searchResults"></activity>
-        <activity android:name=".splashScreen"></activity>
+        <activity android:name=".viewOrders"></activity>
+        <activity android:name=".deleteit"></activity>
+        <activity android:name=".searchResults" />
+        <activity android:name=".splashScreen" />
         <activity android:name=".orderComplete" />
         <activity android:name=".addressDetails" />
         <activity android:name=".customerDetails" />

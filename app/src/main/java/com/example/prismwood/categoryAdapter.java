@@ -84,8 +84,8 @@ public class categoryAdapter extends RecyclerView.Adapter<categoryAdapter.ViewHo
             Glide.with(itemView.getContext()).load(b).fitCenter().placeholder(R.drawable.splash_screen).into(img);
         }
         public void fetchProductsinCollection(String collectionid){
-            String SHOP_DOMAIN ="prism-woods.myshopify.com";
-             String API_KEY = "563bba3d0fec72a1903a6770831e08c2";
+            String SHOP_DOMAIN =BuildConfig.SHOP_DOMAIN;
+            String API_KEY = BuildConfig.API_KEY;
             GraphClient client = GraphClient.builder(context)
                     .shopDomain(SHOP_DOMAIN)
                     .accessToken(API_KEY)
@@ -116,6 +116,7 @@ public class categoryAdapter extends RecyclerView.Adapter<categoryAdapter.ViewHo
                                                                                     .price()
                                                                                     .title()
                                                                                     .compareAtPrice()
+                                                                                    .availableForSale()
                                                                                     .available()
                                                                             )
                                                                     )

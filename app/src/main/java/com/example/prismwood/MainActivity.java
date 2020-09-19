@@ -23,8 +23,8 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class MainActivity extends AppCompatActivity {
-    public static final String SHOP_DOMAIN ="prism-woods.myshopify.com";
-    public static final String API_KEY = "563bba3d0fec72a1903a6770831e08c2";
+    public static final String SHOP_DOMAIN =BuildConfig.SHOP_DOMAIN;
+    public static final String API_KEY = BuildConfig.API_KEY;
     private Handler mHandler;
     RecyclerView cat ;
     public static RecyclerView pro;

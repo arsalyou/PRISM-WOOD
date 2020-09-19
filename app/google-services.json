@@ -10,7 +10,7 @@
       "client_info": {
         "mobilesdk_app_id": "1:878416267489:android:cb6e088d940753a6e88fa0",
         "android_client_info": {
-          "package_name": "com.example.prismwood"
+          "package_name": "com.araxis.tfm"
         }
       },
       "oauth_client": [
@@ -18,7 +18,7 @@
           "client_id": "878416267489-j833lnegf67tp67rc0rh5tni5k47cbnu.apps.googleusercontent.com",
           "client_type": 1,
           "android_info": {
-            "package_name": "com.example.prismwood",
+            "package_name": "com.araxis.tfm",
             "certificate_hash": "8f94fb3b420cd839ab94a922405eb93b4dd34f89"
           }
         },
